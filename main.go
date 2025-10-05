@@ -8,19 +8,21 @@ import (
 func main() {
 	fmt.Println("Olá, o que deseja fazer?")
 
-	showMenu()
+	for {
+		showMenu()
 
-	switch getUserInput() {
-	case 1:
-		fmt.Println("Monitoramento iniciado.")
-	case 2:
-		fmt.Println("Exibindo logs...")
-	case 0:
-		fmt.Println("Saindo do programa.")
-		os.Exit(0)
-	default:
-		fmt.Println("Comando inválido.")
-		os.Exit(-1)
+		switch getUserInput() {
+		case 1:
+			fmt.Println("Monitoramento iniciado.")
+		case 2:
+			fmt.Println("Exibindo logs...")
+		case 0:
+			fmt.Println("Saindo do programa.")
+			os.Exit(0)
+		default:
+			fmt.Println("Comando inválido.")
+			os.Exit(-1)
+		}
 	}
 }
 
