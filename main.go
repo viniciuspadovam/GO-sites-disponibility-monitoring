@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
@@ -13,7 +14,7 @@ func main() {
 
 		switch getUserInput() {
 		case 1:
-			fmt.Println("Monitoramento iniciado.")
+			monitoreSite("https://google.com")
 		case 2:
 			fmt.Println("Exibindo logs...")
 		case 0:
@@ -27,6 +28,7 @@ func main() {
 }
 
 func showMenu() {
+	fmt.Println()
 	fmt.Println("1 - Inicial Monitoramento")
 	fmt.Println("2 - Exibir Logs")
 	fmt.Println("0 - Sair do Programa")
@@ -36,4 +38,15 @@ func getUserInput() int {
 	var command int
 	fmt.Scan(&command)
 	return command
+}
+
+func monitoreSite(url string) {
+	fmt.Println("Iniciando monitoramento do site:", url)
+	resp, _ := http.Get(url)
+
+	if resp.StatusCode == 200 {
+		fmt.Println("Site", url, "está online.")
+	} else {
+		fmt.Println("Site", url, "está offline. Respondeu com o status", resp.StatusCode)
+	}
 }
